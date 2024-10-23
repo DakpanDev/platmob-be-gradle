@@ -1,4 +1,4 @@
-package com.dakpandev.platmobbegradle.domain.model.generic
+package com.dakpandev.platmobbegradle.domain.generic
 
 sealed class ResponseBody {
 

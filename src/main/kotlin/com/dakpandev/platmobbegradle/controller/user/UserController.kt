@@ -1,8 +1,8 @@
 package com.dakpandev.platmobbegradle.controller.user
 
-import com.dakpandev.platmobbegradle.domain.model.generic.Response
-import com.dakpandev.platmobbegradle.domain.model.generic.ResponseBody
-import com.dakpandev.platmobbegradle.domain.model.generic.ResponseBody.Success
+import com.dakpandev.platmobbegradle.domain.generic.Response
+import com.dakpandev.platmobbegradle.domain.generic.ResponseBody
+import com.dakpandev.platmobbegradle.domain.generic.ResponseBody.Success
 import com.dakpandev.platmobbegradle.domain.model.user.LoginUser
 import com.dakpandev.platmobbegradle.domain.model.user.UserEntity
 import com.dakpandev.platmobbegradle.service.UserService
@@ -23,7 +23,7 @@ class UserController(
     @PostMapping
     fun register(@RequestBody entity: UserEntity) = try {
         Response(
-            Success(service.register(entity)),
+            Success(service.save(entity)),
             HttpStatusCode.valueOf(HttpStatus.CREATED.value()),
         )
     } catch (e: DataIntegrityViolationException) {

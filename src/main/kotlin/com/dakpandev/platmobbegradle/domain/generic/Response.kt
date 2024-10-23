@@ -1,4 +1,4 @@
-package com.dakpandev.platmobbegradle.domain.model.generic
+package com.dakpandev.platmobbegradle.domain.generic
 
 import org.springframework.http.ResponseEntity
 

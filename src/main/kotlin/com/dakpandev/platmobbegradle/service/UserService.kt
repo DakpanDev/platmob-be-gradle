@@ -10,7 +10,7 @@ class UserService(
     private val repository: UserRepository,
 ) {
 
-    fun register(entity: UserEntity) = repository.save(entity)
+    fun save(entity: UserEntity) = repository.save(entity)
 
     fun authenticate(loginUser: LoginUser) = repository
         .findOneByUsername(loginUser.username ?: "")
