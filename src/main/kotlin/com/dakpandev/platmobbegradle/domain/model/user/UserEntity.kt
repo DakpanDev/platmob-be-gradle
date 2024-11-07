@@ -1,5 +1,6 @@
 package com.dakpandev.platmobbegradle.domain.model.user
 
+import com.dakpandev.platmobbegradle.domain.model.game.GameEntity
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.UUID
 
@@ -17,4 +18,7 @@ data class UserEntity(
     val username: String = "",
 
     val password: String = "",
+
+    @OneToMany
+    val games: List<GameEntity> = emptyList(),
 )

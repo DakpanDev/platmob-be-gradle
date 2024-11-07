@@ -1,11 +1,12 @@
 package com.dakpandev.platmobbegradle.domain.model.developer
 
+import com.dakpandev.platmobbegradle.domain.model.game.GameEntity
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.UUID
 
 @Entity
 @Table
-data class Developer(
+data class DeveloperEntity(
 
     @Id
     @GeneratedValue(strategy = UUID)
@@ -14,5 +15,9 @@ data class Developer(
     @Column(unique = true)
     val name: String = "",
 
-    // TODO: add games
+    @Column
+    val password: String = "",
+
+    @OneToMany
+    val games: List<GameEntity> = emptyList(),
 )

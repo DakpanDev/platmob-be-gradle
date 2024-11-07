@@ -1,12 +1,11 @@
-package com.dakpandev.platmobbegradle.controller.user
+package com.dakpandev.platmobbegradle.controller.developer
 
 import com.dakpandev.platmobbegradle.domain.generic.ApiResponse
 import com.dakpandev.platmobbegradle.domain.generic.ResponseBody
 import com.dakpandev.platmobbegradle.domain.generic.ResponseBody.Success
-import com.dakpandev.platmobbegradle.domain.model.user.LoginUser
-import com.dakpandev.platmobbegradle.domain.model.user.UserEntity
-import com.dakpandev.platmobbegradle.service.user.UserService
-import org.springframework.dao.DataIntegrityViolationException
+import com.dakpandev.platmobbegradle.domain.model.developer.DeveloperEntity
+import com.dakpandev.platmobbegradle.domain.model.developer.LoginDeveloper
+import com.dakpandev.platmobbegradle.service.developer.DeveloperService
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,26 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("user")
-class UserController(
-    private val service: UserService,
+@RequestMapping("dev")
+class DeveloperController(
+    private val service: DeveloperService,
 ) {
 
     @PostMapping
-    fun register(@RequestBody entity: UserEntity) = try {
+    fun register(@RequestBody entity: DeveloperEntity) = try {
         ApiResponse(
             Success(service.save(entity)),
             HttpStatusCode.valueOf(HttpStatus.CREATED.value()),
         )
-    } catch (_: DataIntegrityViolationException) {
+    } catch (error: Exception) {
         ApiResponse(
-            ResponseBody.Error("User with email address ${entity.email} already exists"),
+            ResponseBody.Error("An error occurred while registering:\n$error"),
             HttpStatusCode.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
         )
     }
 
     @PostMapping("login")
-    fun login(@RequestBody loginUser: LoginUser) = if (service.authenticate(loginUser)) {
+    fun login(@RequestBody loginDeveloper: LoginDeveloper) = if (service.authenticate(loginDeveloper)) {
         ApiResponse(
             Success(true),
             HttpStatusCode.valueOf(HttpStatus.OK.value()),

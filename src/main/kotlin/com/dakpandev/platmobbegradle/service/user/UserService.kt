@@ -1,4 +1,4 @@
-package com.dakpandev.platmobbegradle.service
+package com.dakpandev.platmobbegradle.service.user
 
 import com.dakpandev.platmobbegradle.data.repository.user.UserRepository
 import com.dakpandev.platmobbegradle.domain.model.user.LoginUser
@@ -13,7 +13,6 @@ class UserService(
     fun save(entity: UserEntity) = repository.save(entity)
 
     fun authenticate(loginUser: LoginUser) = repository
-        .findOneByUsername(loginUser.username ?: "")
-        ?.let { it.password == loginUser.password }
-        ?: false
+        .findOneByUsername(loginUser.username)
+        ?.let { it.password == loginUser.password } == true
 }
